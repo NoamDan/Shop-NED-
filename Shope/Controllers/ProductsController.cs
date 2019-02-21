@@ -18,9 +18,11 @@ namespace Shope.Controllers
             _context = context;
         }
 
+
         // GET: Products
         public async Task<IActionResult> Index()
         {
+            ViewData["time"] = DateTime.Now.ToString();
             return View(await _context.Product.ToListAsync());
         }
 

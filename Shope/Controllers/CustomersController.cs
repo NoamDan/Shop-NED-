@@ -18,10 +18,16 @@ namespace Shope.Controllers
             _context = context;
         }
 
-        // GET: Customers
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string g)
         {
-            return View(await _context.Customer.ToListAsync());
+            var filter = from m in _context.Customer select m;
+            if (!string.IsNullOrEmpty(g))
+            {
+                filter = filter.Where(s => s.City.Contains(g));
+            }
+            return View(await filter.ToListAsync());
+            // return View(await _context.Mesima1.ToListAsync());
         }
 
         // GET: Customers/Details/5

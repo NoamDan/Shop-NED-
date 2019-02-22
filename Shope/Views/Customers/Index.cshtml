@@ -12,7 +12,13 @@
 
 <form asp-contoller="Customer" asp-action="index">
     <p>
-       עיר:<input type="text" name="g" />
+       עיר:<input type="text" name="cus" />
+        <input type="submit" value="filter" />
+    </p>
+</form>
+<form asp-contoller="Customer" asp-action="index">
+    <p>
+        שם פרטי:<input type="text" name="fname" />
         <input type="submit" value="filter" />
     </p>
 </form>

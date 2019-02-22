@@ -20,10 +20,20 @@ namespace Shope.Controllers
 
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name,string price)
         {
-            ViewData["time"] = DateTime.Now.ToString();
-            return View(await _context.Product.ToListAsync());
+            var filter = from m in _context.Product select m;
+            if (!string.IsNullOrEmpty(name))
+            {
+                filter = filter.Where(s => s.TypeName.Contains(name));
+            }
+            if (!string.IsNullOrEmpty(price))
+            {
+                var p = int.Parse(price);
+                filter = filter.Where(t => t.Price > p);
+            }
+            return View(await filter.ToListAsync());
+            // return View(await _context.Mesima1.ToListAsync());
         }
 
         // GET: Products/Details/5

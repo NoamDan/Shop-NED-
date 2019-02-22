@@ -14,6 +14,18 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-contoller="Product" asp-action="index">
+    <p>
+        שם המוצר:<input type="text" name="name" />
+        <input type="submit" value="filter" />
+    </p>
+</form>
+<form asp-contoller="Product" asp-action="index">
+    <p>
+        עד מחיר:<input type="text" name="price" />
+        <input type="submit" value="filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>

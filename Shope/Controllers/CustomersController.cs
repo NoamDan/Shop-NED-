@@ -19,12 +19,16 @@ namespace Shope.Controllers
         }
 
 
-        public async Task<IActionResult> Index(string g)
+        public async Task<IActionResult> Index(string cus , string fname)
         {
             var filter = from m in _context.Customer select m;
-            if (!string.IsNullOrEmpty(g))
+            if (!string.IsNullOrEmpty(cus))
             {
-                filter = filter.Where(s => s.City.Contains(g));
+                filter = filter.Where(s => s.City.Contains(cus));
+            }
+            if (!string.IsNullOrEmpty(fname))
+            {
+                filter = filter.Where(t => t.Fname.Contains(fname));
             }
             return View(await filter.ToListAsync());
             // return View(await _context.Mesima1.ToListAsync());

@@ -42,7 +42,7 @@ namespace Shope.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string email, string password)
+        public void  Login(string email, string password)
         {
 
             var check = from cus in _context.Customer
@@ -51,9 +51,19 @@ namespace Shope.Controllers
 
             if (check.Contains(password))
             {
-                return RedirectToAction( "Create", "Customers");
+                var admin = from cus in _context.Customer
+                            where cus.Email == email
+                            select cus.IsAdmin;
+                if (admin.Contains(1))
+                    Global.Admin = 2;
+                //return RedirectToAction("Index", "Home");
+
+                else
+                    Global.Admin = 1;
+                //  return RedirectToAction("Index", "Home");
             }
-            else return View("Login");
+            else
+                Global.Admin = 0;
             //return View();
 
         }

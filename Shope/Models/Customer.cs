@@ -17,9 +17,10 @@ namespace Shope.Models
         public String City { get; set; }
         [Display(Name = "רחוב")]
         public String Street { get; set; }
-        [Display(Name = "מספר בית")]
-       
+        [Display(Name = "מספר בית")]   
         public int NumberHome{ get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
 
     }

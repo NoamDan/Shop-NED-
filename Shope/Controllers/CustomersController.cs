@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.EntityFrameworkCore;
 using Shope.Models;
 
@@ -32,6 +33,29 @@ namespace Shope.Controllers
             }
             return View(await filter.ToListAsync());
             // return View(await _context.Mesima1.ToListAsync());
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult Login(string email, string password)
+        {
+
+            var check = from cus in _context.Customer
+                        where cus.Email == email
+                        select cus.Password;
+
+            if (check.Contains(password))
+            {
+                return RedirectToAction( "Create", "Customers");
+            }
+            else return View("Login");
+            //return View();
+
         }
 
         // GET: Customers/Details/5
@@ -63,15 +87,47 @@ namespace Shope.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fname,Lnam,City,Street,NumberHome")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,Fname,Lnam,City,Street,NumberHome,Email,Password")] Customer customer)
         {
+            
             if (ModelState.IsValid)
             {
+                // check if email adress invalid
+                bool invalid = IsValidEmail(customer.Email);
+
+                if (!invalid)
+                {
+                    return View(customer);
+                }
+
+                // check if email adress exists
+                var Exists = from cus in _context.Customer
+                         where cus.Email == customer.Email
+                         select cus.Id;
+                bool IsNotEmpty = Exists.Any();
+                if (IsNotEmpty)
+                {
+                    return View(customer);
+                }
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(customer);
+        }
+
+        // check if email adress invalid
+        bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         // GET: Customers/Edit/5

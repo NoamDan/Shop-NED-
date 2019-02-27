@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<form asp-contoller="Customer" asp-action="Login">
+    <p>
+        email: <input type="email" placeholder="Enter your email" name="email">
+    </p>
+    <p>
+        password: <input type="text" placeholder="Enter your pasword" name="password" />
+    </p>
+    <a class="btn btn-info btn-lg">
+        <span class="glyphicon glyphicon-log-out"></span> Log in
+    </a>
+</form>
+

@@ -11,6 +11,6 @@ namespace Shope
     static public class Global 
     {
         // chek if the user is admin
-        public static int Admin { get; set; }
+        public static int Admin = 0;
     }
 }

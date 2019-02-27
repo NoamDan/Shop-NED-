@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Shope</title>
+    <title>@ViewData["Title"] - Shop</title>
     
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -18,9 +18,9 @@
 </head>
 <body>
     
-    <a href="Customers/Login" class="btn btn-info btn-lg">
+    @*<a href="Customers/Login" class="btn btn-info btn-lg">
         <span class="glyphicon glyphicon-log-out"></span> Log out
-    </a>
+    </a>*@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -30,14 +30,44 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Shope</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Shop</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Admin">Admin</a></li>
+                    @if (Global.Admin == 0)
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Products")</li>
+                    <li>@Html.ActionLink("Login", "Login", "Customers")</li>
+                    <li>@Html.ActionLink("Register", "Create", "Customers")</li>
+                    @*<li>@Html.ActionLink("Products", "Index", "Products")</li>*@
+                    }
+                    @if (Global.Admin == 2)
+                    {
+                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                        <li>@Html.ActionLink("customers", "Index", "customers")</li>
+                        <li>@Html.ActionLink("User Purchases Report", "UserReports", "Orders")</li>
+                        <li>@Html.ActionLink("Products Sold Report", "ProductsReports", "Orders")</li>
+                        <li>@Html.ActionLink("Addresses Store", "Index", "Addresses")</li>
+                        <li>@Html.ActionLink("Logout", "Login", "Customers")</li>
+                    }
+
+                    @if (Global.Admin == 1)
+                    {
+                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                        @*<li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+            <li>@Html.ActionLink("customers", "Index", "customers")</li>*@
+                        <li>@Html.ActionLink("User Purchases Report", "UserReports", "Orders")</li>
+                        @*<li>@Html.ActionLink("Products Sold Report", "ProductsReports", "Orders")</li>
+            <li>@Html.ActionLink("Addresses Store", "Index", "Addresses")</li>*@
+                        <li>@Html.ActionLink("Logout", "Login", "Customers")</li>
+                    }
+
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="Admin">Admin</a></li>*@
                 </ul>
             </div>
         </div>

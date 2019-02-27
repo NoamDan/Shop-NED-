@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
@@ -42,30 +43,39 @@ namespace Shope.Controllers
         }
 
         [HttpPost]
-        public void  Login(string email, string password)
+        public IActionResult Login(string uname, string psw)
         {
 
             var check = from cus in _context.Customer
-                        where cus.Email == email
+                        where cus.Email == uname
                         select cus.Password;
 
-            if (check.Contains(password))
+            if (check.Contains(psw))
             {
                 var admin = from cus in _context.Customer
-                            where cus.Email == email
+                            where cus.Email == uname
                             select cus.IsAdmin;
                 if (admin.Contains(1))
+                {
                     Global.Admin = 2;
-                //return RedirectToAction("Index", "Home");
-
+                    return RedirectToAction("Index", "Products");
+                }
                 else
+                {
                     Global.Admin = 1;
-                //  return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Products");
+
+
+                }
             }
             else
-                Global.Admin = 0;
-            //return View();
+            { 
 
+
+                
+                Global.Admin = 5;
+                return View();
+            }
         }
 
         // GET: Customers/Details/5
@@ -97,7 +107,7 @@ namespace Shope.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fname,Lnam,City,Street,NumberHome,Email,Password")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,Fname,Lnam,City,Street,NumberHome,Email,Password,IsAdmin")] Customer customer)
         {
             
             if (ModelState.IsValid)
@@ -161,7 +171,7 @@ namespace Shope.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fname,Lnam,City,Street,NumberHome")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fname,Lnam,City,Street,NumberHome,Email,Password,IsAdmin")] Customer customer)
         {
             if (id != customer.Id)
             {

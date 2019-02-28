@@ -38,6 +38,7 @@ namespace Shope.Controllers
 
         public IActionResult Login()
         {
+            Global.Admin = 0;
             return View();
 
         }
@@ -73,9 +74,48 @@ namespace Shope.Controllers
 
 
                 
-                Global.Admin = 5;
+                //Global.Admin = 0;
                 return View();
             }
+        }
+        public IActionResult Register()
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("Id,Fname,Lnam,City,Street,NumberHome,Email,Password,IsAdmin")] Customer customer)
+        //public async Task<IActionResult> Register([Bind("email,psw,fname,lname,city,street,number")] Customer customer)
+        {
+
+            if (ModelState.IsValid)
+            {
+                //// check if email adress invalid
+                //bool invalid = IsValidEmail(customer.Email);
+
+                //if (!invalid)
+                //{
+                //    return View(customer);
+                //}
+
+                // check if email adress exists
+                var Exists = from cus in _context.Customer
+                             where cus.Email == customer.Email
+                             select cus.Id;
+                bool IsNotEmpty = Exists.Any();
+                if (IsNotEmpty)
+                {
+                    return View();
+                }
+                _context.Add(customer);
+                await _context.SaveChangesAsync();
+                Global.Admin = 1;
+                return RedirectToAction("Index", "Products");
+                /*eturn RedirectToAction(nameof(Index));*/
+            }
+            return View(customer);
         }
 
         // GET: Customers/Details/5
@@ -93,7 +133,7 @@ namespace Shope.Controllers
                 return NotFound();
             }
 
-            return View(customer);
+            return View();
         }
 
         // GET: Customers/Create

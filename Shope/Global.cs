@@ -12,5 +12,7 @@ namespace Shope
     {
         // chek if the user is admin
         public static int Admin = 0;
+
+        public static int sessionID = 0;
     }
 }

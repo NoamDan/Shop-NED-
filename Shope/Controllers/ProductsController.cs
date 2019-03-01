@@ -20,7 +20,7 @@ namespace Shope.Controllers
 
 
         // GET: Products
-        public async Task<IActionResult> Index(string name,string price)
+        public async Task<IActionResult> Index(string name,string price, string OfThePrice,string color)
         {
             var filter = from m in _context.Product select m;
             if (!string.IsNullOrEmpty(name))
@@ -30,7 +30,16 @@ namespace Shope.Controllers
             if (!string.IsNullOrEmpty(price))
             {
                 var p = int.Parse(price);
-                filter = filter.Where(t => t.Price > p);
+                filter = filter.Where(t => t.Price <= p);
+            }
+            if (!string.IsNullOrEmpty(OfThePrice))
+            {
+                var p = int.Parse(OfThePrice);
+                filter = filter.Where(t => t.Price >= p);
+            }
+            if (!string.IsNullOrEmpty(color))
+            {
+                filter = filter.Where(s => s.Color.Contains(color));
             }
             return View(await filter.ToListAsync());
             // return View(await _context.Mesima1.ToListAsync());

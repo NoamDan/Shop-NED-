@@ -39,6 +39,7 @@ namespace Shope.Controllers
         public IActionResult Login()
         {
             Global.Admin = 0;
+            Global.sessionID = 0;
             return View();
 
         }
@@ -53,6 +54,7 @@ namespace Shope.Controllers
 
             if (check.Contains(psw))
             {
+                Global.sessionID = 1;
                 var admin = from cus in _context.Customer
                             where cus.Email == uname
                             select cus.IsAdmin;

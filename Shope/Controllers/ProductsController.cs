@@ -13,14 +13,17 @@ namespace Shope.Controllers
     {
         private readonly ShopeContext _context;
 
+        public Cart ThisCart { get;  set; }
+
         public ProductsController(ShopeContext context)
         {
             _context = context;
+            Global.CurrentCart = new Cart();
         }
 
 
         // GET: Products
-        public async Task<IActionResult> Index(string name,string price, string OfThePrice,string color)
+        public async Task<IActionResult> Index(string name, string price)
         {
             var filter = from m in _context.Product select m;
             if (!string.IsNullOrEmpty(name))
@@ -30,24 +33,44 @@ namespace Shope.Controllers
             if (!string.IsNullOrEmpty(price))
             {
                 var p = int.Parse(price);
-                filter = filter.Where(t => t.Price <= p);
-            }
-            if (!string.IsNullOrEmpty(OfThePrice))
-            {
-                var p = int.Parse(OfThePrice);
-                filter = filter.Where(t => t.Price >= p);
-            }
-            if (!string.IsNullOrEmpty(color))
-            {
-                filter = filter.Where(s => s.Color.Contains(color));
+                filter = filter.Where(t => t.Price > p);
             }
             return View(await filter.ToListAsync());
             // return View(await _context.Mesima1.ToListAsync());
         }
 
+        public async Task<IActionResult> ProductHome(string name, string price)
+        {
+            var filter = from m in _context.Product select m;
+            if (!string.IsNullOrEmpty(name))
+            {
+                filter = filter.Where(s => s.TypeName.Contains(name));
+            }
+            if (!string.IsNullOrEmpty(price))
+            {
+                var p = int.Parse(price);
+                filter = filter.Where(t => t.Price > p);
+            }
+            return View(await filter.ToListAsync());
+            // return View(await _context.Mesima1.ToListAsync());
+        }
+
+
+        
+        public IActionResult AddToCart(int productid)
+        {
+            Product p = _context.Product.Where(x => x.Id == productid).FirstOrDefault();
+            Global.CurrentCart.Products.Add(p);
+            Global.CurrentCart.TotalAmount+=p.Price;
+            return View("cart");
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //var  from pro in _context.Product
+            //            where pro.Id ==  id
+            //            select pro;
+
             if (id == null)
             {
                 return NotFound();

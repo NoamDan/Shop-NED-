@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Shope.Models.Product>
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+
+    <h2>Index</h2>
+
+
+    @ViewData["time"]
+
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <form asp-contoller="Product" asp-action="index">
+        <p>
+            שם המוצר:<input type="text" name="name" />
+            <input type="submit" value="חיפוש" />
+        </p>
+    </form>
+    <form asp-contoller="Product" asp-action="index">
+        <p>
+            עד מחיר:<input type="text" name="price" />
+            <input type="submit" value="חיפוש" />
+        </p>
+    </form>
+    <form asp-contoller="Product" asp-action="index">
+        <p>
+            ממחיר:<input type="text" name="OfThePrice" />
+            <input type="submit" value="חיפוש" />
+        </p>
+    </form>
+    <form asp-contoller="Product" asp-action="index">
+        <p>
+            צבע:<input type="text" name="color" />
+            <input type="submit" value="חיפוש" />
+        </p>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Unit)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    <form asp-contoller="Product" asp-action="AddToCart">
+                        <p hidden>    <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" /></p>
+                        <input type="submit" value="הוסף לעגלה" />
+                    </form>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>

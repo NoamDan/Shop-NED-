@@ -36,32 +36,42 @@
                 <ul class="nav navbar-nav">
                     @if (Global.Admin == 0)
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Products")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Customers")</li>
-                    <li>@Html.ActionLink("Register", "Register", "Customers")</li>
-                    @*<li>@Html.ActionLink("Products", "Index", "Products")</li>*@
+                        <li>@Html.ActionLink("Home", "ProductHome", "Products")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Customers")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Customers")</li>
+                        <li>@Html.ActionLink("Cart", "cart", "Products")</li>
+                        <li>@Html.ActionLink("Payment", "Payment", "Products")</li>
+                        @*<li>@Html.ActionLink("Products", "Index", "Products")</li>*@
                     }
-                    @if (Global.Admin == 2)
+                    else
                     {
-                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
-                        <li>@Html.ActionLink("customers", "Index", "customers")</li>
-                        <li>@Html.ActionLink("User Purchases Report", "UserReports", "Orders")</li>
-                        <li>@Html.ActionLink("Products Sold Report", "ProductsReports", "Orders")</li>
-                        <li>@Html.ActionLink("Addresses Store", "Index", "Addresses")</li>
+                        <li>@Html.ActionLink("Home", "ProductHome", "Products")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Customers")</li>
+                        <li>@Html.ActionLink("User Purchases Report", "UserReports", "Orders")</li>
+
+
+                        @if (Global.Admin == 2)
+                        {
+
+                            <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                            <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                            <li>@Html.ActionLink("customers", "Index", "customers")</li>
+                            <li>@Html.ActionLink("Products Sold Report", "ProductsReports", "Orders")</li>
+                            <li>@Html.ActionLink("Addresses Store", "Index", "Addresses")</li>
+                        }
                     }
 
-                    @if (Global.Admin == 1)
-                    {
-                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                        @*<li>@Html.ActionLink("Orders", "Index", "Orders")</li>
-            <li>@Html.ActionLink("customers", "Index", "customers")</li>*@
-                        <li>@Html.ActionLink("User Purchases Report", "UserReports", "Orders")</li>
-                        @*<li>@Html.ActionLink("Products Sold Report", "ProductsReports", "Orders")</li>
-            <li>@Html.ActionLink("Addresses Store", "Index", "Addresses")</li>*@
-                        <li>@Html.ActionLink("Logout", "Logout", "Customers")</li>
-                    }
+
+                    @*@if (Global.Admin == 1)
+                {
+                    <li>@Html.ActionLink("Home", "ProductHome", "Products")</li>
+                    <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+        <li>@Html.ActionLink("customers", "Index", "customers")</li>
+                    <li>@Html.ActionLink("User Purchases Report", "UserReports", "Orders")</li>
+                    <li>@Html.ActionLink("Products Sold Report", "ProductsReports", "Orders")</li>
+        <li>@Html.ActionLink("Addresses Store", "Index", "Addresses")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Customers")</li>
+                }*@
 
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>

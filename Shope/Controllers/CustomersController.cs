@@ -42,7 +42,7 @@ namespace Shope.Controllers
             Global.sessionID = 0;
             Global.CurrentCart.Products.Clear();
             Global.CurrentCart.TotalAmount = 0;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ProductHome", "Products");
 
         }
         public IActionResult Login()
@@ -73,12 +73,12 @@ namespace Shope.Controllers
                 if (admin.Contains(1))
                 {
                     Global.Admin = 2;
-                    return RedirectToAction("Index", "Products");
+                    return RedirectToAction("ProductHome", "Products");
                 }
                 else
                 {
                     Global.Admin = 1;
-                    return RedirectToAction("Index", "Products");
+                    return RedirectToAction("ProductHome", "Products");
 
 
                 }
@@ -126,7 +126,7 @@ namespace Shope.Controllers
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 Global.Admin = 1;
-                return RedirectToAction("Index", "Products");
+                return RedirectToAction("ProductHome", "Products");
                 /*eturn RedirectToAction(nameof(Index));*/
             }
             return View(customer);

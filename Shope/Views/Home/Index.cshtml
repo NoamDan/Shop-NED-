@@ -3,7 +3,67 @@
     ViewData["Title"] = "Home Page";
 }
 
-<a href="~/Customers/Create">הרשמה</a>
+<a href="~/Customers/Register">הרשמה</a>
 
 <a href="~/Customers/Login">התחברות</a>
 
+<a class="weatherwidget-io" href="https://forecast7.com/he/32d0934d78/tel-aviv-yafo/" data-label_1="תל אביב יפו" data-label_2="WEATHER" data-theme="original">תל אביב יפו WEATHER</a>
+<script>
+    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            /*background: rgb(87, 207, 244);*/
+            color: #fff;
+            font-family: sans-serif;
+            margin: 0;
+            padding-top: 5em;
+            text-align: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .twitter-share, .facebook-share {
+            background: #fff;
+            color: rgb(87, 207, 244);
+            cursor: pointer;
+            display: inline-block;
+            padding: 1em 2em;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            &:hover
+
+        {
+            position: relative;
+            top: -1px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <span class="twitter-share" data-js="twitter-share">Share on Twitter</span>
+    <span class="facebook-share" data-js="facebook-share">Share on Facebook</span>
+    <script>
+        var twitterShare = document.querySelector('[data-js="twitter-share"]');
+
+        twitterShare.onclick = function (e) {
+            e.preventDefault();
+            var twitterWindow = window.open('https://twitter.com/share?url=' + document.URL, 'twitter-popup', 'height=350,width=600');
+            if (twitterWindow.focus) { twitterWindow.focus(); }
+            return false;
+        }
+
+        var facebookShare = document.querySelector('[data-js="facebook-share"]');
+
+        facebookShare.onclick = function (e) {
+            e.preventDefault();
+            var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u=' + document.URL, 'facebook-popup', 'height=350,width=600');
+            if (facebookWindow.focus) { facebookWindow.focus(); }
+            return false;
+        }
+    </script>
+</body>
+</html>

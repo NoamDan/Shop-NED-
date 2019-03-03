@@ -2,25 +2,70 @@
 @{
     ViewData["Title"] = "cart";
 }
-
-<h2>cart</h2>
-@{var price = Global.CurrentCart.TotalAmount;}
-@foreach (var item in Global.CurrentCart.Products)
-{
-    <p>שם:  </p>
-    @Html.DisplayFor(modelItem => item.TypeName)
-    <p>מחיר:  </p>
-    @Html.DisplayFor(modelItem => item.Price)
-    <p>צבע:  </p>
-    @Html.DisplayFor(modelItem => item.Color)
-    <p>משקל:  </p>
-    @Html.DisplayFor(modelItem => item.Weight)
-    <p>יחידות:  </p>
-    @Html.DisplayFor(modelItem => item.Unit)
-    
+<!DOCTYPE html>
+<html>
+<style>
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
 }
-    <p>@price מחיר כולל:</p>
 
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #008CBA;
+    }
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+</style>
+<body>
+    <h2>cart</h2>
+    @{var price = Global.CurrentCart.TotalAmount;}
+    @foreach (var item in Global.CurrentCart.Products)
+    {
+        <p>שם:  </p>
+        @Html.DisplayFor(modelItem => item.TypeName)
+        <p>מחיר:  </p>
+        @Html.DisplayFor(modelItem => item.Price)
+        <p>צבע:  </p>
+        @Html.DisplayFor(modelItem => item.Color)
+        <p>משקל:  </p>
+        @Html.DisplayFor(modelItem => item.Weight)
+        <p>יחידות:  </p>
+        @Html.DisplayFor(modelItem => item.Unit)
+
+    }
+    <p>@price מחיר כולל:</p>
+    <div class="clearfix">
+        <form asp-contoller="Products" asp-action="ProductHome">
+            <button type="submit" class="cancelbtn">הוסף מוצרים</button>
+        </form>
+        <form asp-contoller="Products" asp-action="Payment">
+            <button type="submit" class="signupbtn">לקופה</button>
+        </form>
+    </div>
+</body>
+</html>
 
 
 

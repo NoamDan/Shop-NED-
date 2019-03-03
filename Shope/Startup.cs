@@ -49,7 +49,8 @@ namespace Shope
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Products}/{action=Index}/{id?}");
+                    //template: "{controller=Products}/{action=Index}/{id?}");
+                    template: "{controller=Products}/{action=ProductHome}/{id?}");
             });
         }
     }

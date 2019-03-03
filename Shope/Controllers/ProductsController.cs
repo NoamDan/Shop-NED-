@@ -18,7 +18,7 @@ namespace Shope.Controllers
         public ProductsController(ShopeContext context)
         {
             _context = context;
-            Global.CurrentCart = new Cart();
+            
         }
 
 
@@ -55,15 +55,35 @@ namespace Shope.Controllers
             // return View(await _context.Mesima1.ToListAsync());
         }
 
+        public IActionResult cart()
+        {
+            return View();
+        }
 
-        
-        public IActionResult AddToCart(int productid)
+        public IActionResult AddToCart(int productid , int unit)
         {
             Product p = _context.Product.Where(x => x.Id == productid).FirstOrDefault();
-            Global.CurrentCart.Products.Add(p);
-            Global.CurrentCart.TotalAmount+=p.Price;
+
+            for(int i=0; i < unit; i++) {
+                if (p.Unit > 0)
+                {
+                    Global.CurrentCart.Products.Add(p);
+                    Global.CurrentCart.TotalAmount += p.Price;
+                }
+            }
             return View("cart");
         }
+
+        public IActionResult Payment()
+        {
+            if(Global.sessionID == 0)
+            {
+                return RedirectToAction("login", "Customers");
+            }
+            return View();
+
+        }
+
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {

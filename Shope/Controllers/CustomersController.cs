@@ -36,10 +36,19 @@ namespace Shope.Controllers
             // return View(await _context.Mesima1.ToListAsync());
         }
 
-        public IActionResult Login()
+        public IActionResult LogOut()
         {
             Global.Admin = 0;
             Global.sessionID = 0;
+            Global.CurrentCart.Products.Clear();
+            Global.CurrentCart.TotalAmount = 0;
+            return RedirectToAction("Index", "Home");
+
+        }
+        public IActionResult Login()
+        {
+            //Global.Admin = 0;
+            //Global.sessionID = 0;
             return View();
 
         }
@@ -54,7 +63,10 @@ namespace Shope.Controllers
 
             if (check.Contains(psw))
             {
-                Global.sessionID = 1;
+                var CurrentUser = from cus in _context.Customer
+                            where cus.Email == uname
+                            select cus.Id;
+                Global.sessionID = CurrentUser.FirstOrDefault();
                 var admin = from cus in _context.Customer
                             where cus.Email == uname
                             select cus.IsAdmin;

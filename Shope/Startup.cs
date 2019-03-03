@@ -16,6 +16,7 @@ namespace Shope
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Global.CurrentCart = new Cart();
         }
 
         public IConfiguration Configuration { get; }

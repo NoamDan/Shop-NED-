@@ -12,5 +12,9 @@ namespace Shope.Models
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual ICollection<OrderAndProduct> OrderAndProduct { get; set; }
+        public  Order()
+        {
+            this.CustomerId = Global.sessionID;
+        }
     }
 }

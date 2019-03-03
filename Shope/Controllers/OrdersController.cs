@@ -68,6 +68,20 @@ namespace Shope.Controllers
             return View(order);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAuto([Bind("Id")] Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id");
+            return View(order);
+        }
+
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

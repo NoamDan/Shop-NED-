@@ -82,6 +82,7 @@
                 <td>
                     <form asp-contoller="Product" asp-action="AddToCart">
                         <p hidden>    <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" /></p>
+                        <input type="number" value="יחידות" name="unit" />
                         <input type="submit" value="הוסף לעגלה" />
                     </form>
                 </td>

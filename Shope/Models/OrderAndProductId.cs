@@ -8,10 +8,18 @@ namespace Shope.Models
     public class OrderAndProduct
     {
         public int OrderAndProductId { get; set; }
-
         public int OrderId { get; set; }
         public Order Order { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
+        public OrderAndProduct()
+        {
+                Global.flag = Global.ord.UpdateOrderId();
+                if (Global.flag)
+                {  
+                    this.OrderId = Global.CurrenOrderId;
+                    this.ProductId = Global.CurrentCart.Products.FirstOrDefault().Id;
+                }
+        }
     }
 }

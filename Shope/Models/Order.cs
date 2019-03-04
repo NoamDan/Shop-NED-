@@ -16,5 +16,15 @@ namespace Shope.Models
         {
             this.CustomerId = Global.sessionID;
         }
+        public bool UpdateOrderId()
+        {
+            if (this.Id>0) {
+                Global.CurrenOrderId = this.Id;
+                Global.flag = true;
+                return true;
+            }
+            return false;
+           
+        }
     }
 }

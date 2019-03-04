@@ -106,6 +106,46 @@ namespace Shope.Controllers
             return View(product);
         }
 
+        
+        OrderAndProduct OrdAndPro;
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAuto()
+        {
+            Global.ord = new Order();
+            if (ModelState.IsValid)
+            {
+                _context.Add(Global.ord);
+                await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
+            }
+            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id");
+            if (ModelState.IsValid)
+            {
+                int size = Global.CurrentCart.Products.Count;
+                for (int i = 0; i <size; i++)
+                {
+                    OrdAndPro = new OrderAndProduct();
+                    _context.Add(OrdAndPro);
+                    await _context.SaveChangesAsync();
+                    //return RedirectToAction(nameof(Index));
+                    var result = (from p in _context.Product
+                                  where p.Id == Global.CurrentCart.Products.FirstOrDefault().Id
+                                  select p).FirstOrDefault();
+                    result.Unit -= 1;
+                    _context.SaveChanges();
+                    if (!(i == size - 1)){
+                        Global.CurrentCart.Products.RemoveAt(i);
+                    }
+                   
+                } 
+                Global.CurrentCart = new Cart();
+                
+
+            }
+            return RedirectToAction("ProductHome", "Products");
+        }
+
         // GET: Products/Create
         public IActionResult Create()
         {

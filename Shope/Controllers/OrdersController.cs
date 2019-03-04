@@ -67,19 +67,15 @@ namespace Shope.Controllers
             ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", order.CustomerId);
             return View(order);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAuto([Bind("Id")] Order order)
+        public IActionResult MyOrders()
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id");
-            return View(order);
+            var result = from ord in _context.Order
+                         where ord.CustomerId == Global.sessionID
+                         select ord.Id;
+            var FinalResult = from ordEndPro in _context.OrderAndProduct
+                              group ordEndPro.OrderId by result;
+
+            return View(FinalResult.ToListAsync());
         }
 
         // GET: Orders/Edit/5

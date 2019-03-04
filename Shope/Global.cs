@@ -15,6 +15,9 @@ namespace Shope
         public static int Admin = 0;
         public static Cart CurrentCart;
         public static int sessionID = 0;
+        public static int CurrenOrderId;
+        public static Order ord;
+        public static bool flag = false;
     }
     
     

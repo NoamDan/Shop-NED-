@@ -78,6 +78,10 @@ namespace Shope.Controllers
                 else
                 {
                     Global.Admin = 1;
+                    if (Global.CurrentCart.TotalAmount > 0)
+                    {
+                        return RedirectToAction("cart", "Products");
+                    }
                     return RedirectToAction("ProductHome", "Products");
 
 

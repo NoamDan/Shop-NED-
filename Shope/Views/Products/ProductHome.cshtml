@@ -14,30 +14,35 @@
     <p>
         <a asp-action="Create">Create New</a>
     </p>
-    <form asp-contoller="Product" asp-action="index">
-        <p>
-            שם המוצר:<input type="text" name="name" />
-            <input type="submit" value="חיפוש" />
-        </p>
-    </form>
-    <form asp-contoller="Product" asp-action="index">
-        <p>
-            עד מחיר:<input type="text" name="price" />
-            <input type="submit" value="חיפוש" />
-        </p>
-    </form>
-    <form asp-contoller="Product" asp-action="index">
-        <p>
-            ממחיר:<input type="text" name="OfThePrice" />
-            <input type="submit" value="חיפוש" />
-        </p>
-    </form>
-    <form asp-contoller="Product" asp-action="index">
-        <p>
-            צבע:<input type="text" name="color" />
-            <input type="submit" value="חיפוש" />
-        </p>
-    </form>
+    <ul>
+        <li>
+
+            <form asp-contoller="Product" asp-action="index">
+                <p>
+                    שם המוצר:<input type="text" name="name" />
+                    <input type="submit" value="חיפוש" />
+                </p>
+            </form>
+            <form asp-contoller="Product" asp-action="index">
+                <p>
+                    עד מחיר:<input type="text" name="price" />
+                    <input type="submit" value="חיפוש" />
+                </p>
+            </form>
+            <form asp-contoller="Product" asp-action="index">
+                <p>
+                    ממחיר:<input type="text" name="OfThePrice" />
+                    <input type="submit" value="חיפוש" />
+                </p>
+            </form>
+            <form asp-contoller="Product" asp-action="index">
+                <p>
+                    צבע:<input type="text" name="color" />
+                    <input type="submit" value="חיפוש" />
+                </p>
+            </form>
+        </li>
+    </ul>
     <table class="table">
         <thead>
             <tr>

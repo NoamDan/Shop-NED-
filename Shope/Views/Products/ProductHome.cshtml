@@ -16,9 +16,7 @@
             padding: 1em 2em;
             -webkit-border-radius: 6px;
             border-radius: 6px;
-           
             background-color: cornflowerblue;
-          
             color: white;
         }
     </style>
@@ -86,73 +84,48 @@
                     </script>
 
                 </div>
+                <div class="col-sm-4">
 
 
+                </div>
             </div>
-        </div>
-    </div>
-
-
-
-
-</body>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TypeName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Color)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Weight)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Unit)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Image)
-                </th>
-
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+            <h1>xscsdcdscsc3</h1>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TypeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Color)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Weight)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Image)
-                    </td>
-                    <td>
-                        <form asp-contoller="Product" asp-action="AddToCart">
-                            <p hidden>    <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" /></p>
-                            <input type="number" value="יחידות" name="unit" />
-                            <input type="submit" value="הוסף לעגלה" />
-                        </form>
-                    </td>
-                </tr>
+                <div class="item col-lg-3 hvr-float-shadow">
+                    <div class="thumbnail">
+                        @*<div class="group list-group-image product-img" style="width:80px;height:200px;;background-image: url('@Html.DisplayFor(modelItem => item.image)')"></div>*@
+                        <img class="img-responsive" src="@Html.DisplayFor(modelItem=> item.Image)" style="width:200px;height:220px" />
+
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading">
+                                <label>Name:</label>
+                                @Html.DisplayFor(modelItem => item.TypeName)
+                            </h4>
+
+                            <p class="group inner list-group-item-text">
+                                <label>Price:</label>$@Html.DisplayFor(modelItem => item.Price)
+                            </p>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    @Html.ActionLink("Add to cart", "", "Products", new { id = item.Id }, new { @class = "btn btn-primary form-control hvr-pulse" })
+                                    @*<a class="btn btn-success" href="/somecontroller/someaction/123">Add to cart</>*@
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
 
-        </tbody>
-    </table>
+
+        </div>
+
+    </div>
+</body>
+
+
 
 
 

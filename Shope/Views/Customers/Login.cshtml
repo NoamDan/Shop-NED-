@@ -211,6 +211,33 @@ span.psw {
   float: right;
   padding-top: 16px;
 }
+        a.one:link, a.one:visited {
+            background-color: #f44336;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        a.one:hover, a.one:active {
+            background-color: red;
+        }
+
+        a.twe:link, a.twe:visited {
+            position: absolute;
+            right: 202px;
+            background-color: #008CBA;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        a.twe:hover, a.twe:active {
+            background-color: blue;
+        }
 
     </style>
 </head>
@@ -236,10 +263,11 @@ span.psw {
             </label>
         </div>
 
-        <div class="container-fluid" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw"> <a href="~/Customers/Register">Register</a></span>
-        </div>
+        
+            @*<button type="button" class="cancelbtn">Cancel</button>*@
+            <a class="one" href="~/Products/ProductHome">Cancel</a>
+            <a class="twe" href="~/Customers/Register">Register</></a>
+        
     </form>
 
 </body>

@@ -3,91 +3,103 @@
 @{
     ViewData["Title"] = "Index";
 }
+<!DOCTYPE html>
 
+<head>
+     @ViewData["time"]
 
-<h2>Index</h2>
+</head>
+<body>
+    <p> <a asp-action="Create">Create New</a>  </p>
+   
 
-
-@ViewData["time"]
-
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<form asp-contoller="Product" asp-action="index">
-    <p>
-        שם המוצר:<input type="text" name="name" />
-        <input type="submit" value="חיפוש" />
-    </p>
-</form>
-<form asp-contoller="Product" asp-action="index">
-    <p>
-        עד מחיר:<input type="text" name="price" />
-        <input type="submit" value="חיפוש" />
-    </p>
-</form>
-<form asp-contoller="Product" asp-action="index">
-    <p>
-        ממחיר:<input type="text" name="OfThePrice" />
-        <input type="submit" value="חיפוש" />
-    </p>
-</form>
-<form asp-contoller="Product" asp-action="index">
-<p>
-    צבע:<input type="text" name="color" />
-    <input type="submit" value="חיפוש" />
-</p>
-</form>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Unit)
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    @*<form asp-contoller="Product" asp-action="index">
+        <p>
+            שם המוצר:<input type="text" name="name" />
+            <input type="submit" value="חיפוש" />
+        </p>
+    </form>
+    <form asp-contoller="Product" asp-action="index">
+        <p>
+            עד מחיר:<input type="text" name="price" />
+            <input type="submit" value="חיפוש" />
+        </p>
+    </form>
+    <form asp-contoller="Product" asp-action="index">
+        <p>
+            ממחיר:<input type="text" name="OfThePrice" />
+            <input type="submit" value="חיפוש" />
+        </p>
+    </form>
+    <form asp-contoller="Product" asp-action="index">
+        <p>
+            צבע:<input type="text" name="color" />
+            <input type="submit" value="חיפוש" />
+        </p>
+    </form>*@
+ <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Weight)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Unit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Unit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Unit)
+                    </td>.
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+     
+      
+    </table>
+
+
+
+
+  </body>

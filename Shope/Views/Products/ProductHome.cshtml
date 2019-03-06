@@ -1,48 +1,102 @@
 ﻿@model IEnumerable<Shope.Models.Product>
 
-    @{
-        ViewData["Title"] = "Index";
-    }
+@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+
+<head>
+    <style>
+
+        .twitter-share, .facebook-share {
+            background: #fff;
+            color: rgb(87, 207, 244);
+            cursor: pointer;
+            display: inline-table;
+            padding: 1em 2em;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+           
+            background-color: cornflowerblue;
+          
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-3 well">
+                <div class="well">
+                    <p><a href="#">סנן</a></p>
+                    <img src="~/images/הורד.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+                    <br />
+                    <form asp-contoller="Product" asp-action="index">
+                        <p>
+                            שם המוצר:<input type="text" name="name" />
+                            <input type="submit" value="חיפוש" />
+                        </p>
+                    </form>
+                    <form asp-contoller="Product" asp-action="index">
+                        <p>
+                            ממחיר:<input type="text" name="OfThePrice" />
+                            <input type="submit" value="חיפוש" />
+                        </p>
+                    </form>
+                    <form asp-contoller="Product" asp-action="index">
+                        <p>
+                            עד מחיר:<input type="text" name="price" />
+                            <input type="submit" value="חיפוש" />
+                            <br />
+                        </p>
+                    </form>
+                    <form asp-contoller="Product" asp-action="index">
+                        <p>
+                            בחר צבע<input type="text" name="color" />
+                            <input type="submit" value="חיפוש" />
+                        </p>
+                    </form>
+                    <br />
+                    <br />
+                    <span class="twitter-share" data-js="twitter-share">Share on Twitter</span>
 
 
-    <h2>Index</h2>
+                    <br />
+                    <br />
+                    <span class="facebook-share" data-js="facebook-share">Share on Facebook</span>
+                    <script>
+                        var twitterShare = document.querySelector('[data-js="twitter-share"]');
+
+                        twitterShare.onclick = function (e) {
+                            e.preventDefault();
+                            var twitterWindow = window.open('https://twitter.com/share?url=' + document.URL, 'twitter-popup', 'height=350,width=600');
+                            if (twitterWindow.focus) { twitterWindow.focus(); }
+                            return false;
+                        }
+
+                        var facebookShare = document.querySelector('[data-js="facebook-share"]');
+
+                        facebookShare.onclick = function (e) {
+                            e.preventDefault();
+                            var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u=' + document.URL, 'facebook-popup', 'height=350,width=600');
+                            if (facebookWindow.focus) { facebookWindow.focus(); }
+                            return false;
+                        }
+                    </script>
+
+                </div>
 
 
-    @ViewData["time"]
+            </div>
+        </div>
+    </div>
 
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <ul>
-        <li>
 
-            <form asp-contoller="Product" asp-action="index">
-                <p>
-                    שם המוצר:<input type="text" name="name" />
-                    <input type="submit" value="חיפוש" />
-                </p>
-            </form>
-            <form asp-contoller="Product" asp-action="index">
-                <p>
-                    עד מחיר:<input type="text" name="price" />
-                    <input type="submit" value="חיפוש" />
-                </p>
-            </form>
-            <form asp-contoller="Product" asp-action="index">
-                <p>
-                    ממחיר:<input type="text" name="OfThePrice" />
-                    <input type="submit" value="חיפוש" />
-                </p>
-            </form>
-            <form asp-contoller="Product" asp-action="index">
-                <p>
-                    צבע:<input type="text" name="color" />
-                    <input type="submit" value="חיפוש" />
-                </p>
-            </form>
-        </li>
-    </ul>
+
+</body>
+
     <table class="table">
         <thead>
             <tr>
@@ -61,6 +115,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Unit)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
 
                 <th></th>
             </tr>
@@ -68,30 +125,34 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Weight)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Unit)
-                </td>
-                <td>
-                    <form asp-contoller="Product" asp-action="AddToCart">
-                        <p hidden>    <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" /></p>
-                        <input type="number" value="יחידות" name="unit" />
-                        <input type="submit" value="הוסף לעגלה" />
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        <form asp-contoller="Product" asp-action="AddToCart">
+                            <p hidden>    <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" /></p>
+                            <input type="number" value="יחידות" name="unit" />
+                            <input type="submit" value="הוסף לעגלה" />
+                        </form>
+                    </td>
+                </tr>
             }
+
         </tbody>
     </table>
+
+
+

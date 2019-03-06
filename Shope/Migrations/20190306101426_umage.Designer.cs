@@ -11,9 +11,10 @@ using System;
 namespace Shope.Migrations
 {
     [DbContext(typeof(ShopeContext))]
-    partial class ShopeContextModelSnapshot : ModelSnapshot
+    [Migration("20190306101426_umage")]
+    partial class umage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

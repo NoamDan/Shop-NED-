@@ -157,7 +157,7 @@ namespace Shope.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TypeName,Price,Color,Weight,Unit,OrderId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,TypeName,Price,Color,Weight,Unit, Image,OrderId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -189,7 +189,7 @@ namespace Shope.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TypeName,Price,Color,Weight,Unit,OrderId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TypeName,Price,Color,Weight,Unit, Image,OrderId")] Product product)
         {
             if (id != product.Id)
             {

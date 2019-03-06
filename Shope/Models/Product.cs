@@ -21,6 +21,7 @@ namespace Shope.Models
         [Display(Name = "כמות")]
         public int Unit { get; set; }
         public int OrderId { get; set; }
+        public string Image { get; set; }
         public virtual ICollection<OrderAndProduct> OrderAndProduct { get; set; }
 
 

@@ -3,7 +3,7 @@
     ViewData["Title"] = "cart";
 }
 <!DOCTYPE html>
-<html>
+
 <style>
 /* Set a style for all buttons */
 button {
@@ -39,33 +39,41 @@ button:hover {
 }
 </style>
 <body>
-    <h2>cart</h2>
-    @{var price = Global.CurrentCart.TotalAmount;}
-    @foreach (var item in Global.CurrentCart.Products)
-    {
-        <p>שם:  </p>
-        @Html.DisplayFor(modelItem => item.TypeName)
-        <p>מחיר:  </p>
-        @Html.DisplayFor(modelItem => item.Price)
-        <p>צבע:  </p>
-        @Html.DisplayFor(modelItem => item.Color)
-        <p>משקל:  </p>
-        @Html.DisplayFor(modelItem => item.Weight)
-        <p>יחידות:  </p>
-        @Html.DisplayFor(modelItem => item.Unit)
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-3 well">
+                <div class="well">
+                    <h2>cart</h2>
+                    @{var price = Global.CurrentCart.TotalAmount;}
+                    @foreach (var item in Global.CurrentCart.Products)
+                    {
+                        <p>שם:  </p>
+                        @Html.DisplayFor(modelItem => item.TypeName)
+                        <p>מחיר:  </p>
+                        @Html.DisplayFor(modelItem => item.Price)
+                        <p>צבע:  </p>
+                        @Html.DisplayFor(modelItem => item.Color)
+                        <p>משקל:  </p>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                        <p>יחידות:  </p>
+                        @Html.DisplayFor(modelItem => item.Unit)
 
-    }
-    <p>@price מחיר כולל:</p>
-    <div class="clearfix">
-        <form asp-contoller="Products" asp-action="ProductHome">
-            <button type="submit" class="cancelbtn">הוסף מוצרים</button>
-        </form>
-        <form asp-contoller="Products" asp-action="Payment">
-            <button type="submit" class="signupbtn">לקופה</button>
-        </form>
+                    }
+                    <p>@price מחיר כולל:</p>
+                    <div class="clearfix">
+                        <form asp-contoller="Products" asp-action="ProductHome">
+                            <button type="submit" class="cancelbtn">הוסף מוצרים</button>
+                        </form>
+                        <form asp-contoller="Products" asp-action="Payment">
+                            <button type="submit" class="signupbtn">לקופה</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+    </body>
+
 
 
 

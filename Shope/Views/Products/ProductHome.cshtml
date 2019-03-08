@@ -82,20 +82,21 @@
                             return false;
                         }
                     </script>
-
-                </div>
-                <div class="col-sm-4">
-
-
                 </div>
             </div>
-            <h1>xscsdcdscsc3</h1>
+            <br />
+            <br />
+            <br />
+            <a href="http://images.saloona.co.il/opalik/files/2017/03/3evuby2icj60w2iz9qle.jpg" target="_blank">
+                <img src="http://images.saloona.co.il/opalik/files/2017/03/3evuby2icj60w2iz9qle.jpg" alt="Alternate Text" style="width:850px;height:300px;">
+            </a>
+            <h1>המוצרים שלנו</h1>
             @foreach (var item in Model)
             {
                 <div class="item col-lg-3 hvr-float-shadow">
                     <div class="thumbnail">
                         @*<div class="group list-group-image product-img" style="width:80px;height:200px;;background-image: url('@Html.DisplayFor(modelItem => item.image)')"></div>*@
-                        <img class="img-responsive" src="@Html.DisplayFor(modelItem=> item.Image)" style="width:200px;height:220px" />
+                        <img class="img-responsive" src="@Html.DisplayFor(modelItem=> item.Image)" style="width:200px;height:220px" target="_blank" />
 
                         <div class="caption">
                             <h4 class="group inner list-group-item-heading">
@@ -106,22 +107,20 @@
                             <p class="group inner list-group-item-text">
                                 <label>Price:</label>$@Html.DisplayFor(modelItem => item.Price)
                             </p>
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    @Html.ActionLink("Add to cart", "", "Products", new { id = item.Id }, new { @class = "btn btn-primary form-control hvr-pulse" })
-                                    @*<a class="btn btn-success" href="/somecontroller/someaction/123">Add to cart</>*@
-                                </div>
 
+                            <form asp-contoller="Product" asp-action="AddToCart">
 
-                            </div>
+                                <p hidden>
+                                    <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" />
+                                </p>
+                                <input type="number" value="1" name="unit" />
+                                <input type="submit" value="הוסף לעגלה" style="" />
+                            </form>
                         </div>
                     </div>
                 </div>
             }
-
-
-        </div>
-
+        </div> 
     </div>
 </body>
 

@@ -44,21 +44,27 @@ button:hover {
             <div class="col-sm-8 well">
                 <div class="well">
                     <h2>העגלה שלי</h2>
+                    @{ var ProductName  = "abc";}
                     @{var price = Global.CurrentCart.TotalAmount;}
                     @foreach (var item in Global.CurrentCart.Products)
                     {
-                        <a class="table">
-                        @*<p>שם:  </p>*@
-                        @Html.DisplayFor(modelItem => item.TypeName)
-                        @*<p>מחיר:  </p>*@
-                        @Html.DisplayFor(modelItem => item.Price)
-                        @*<p>צבע:  </p>*@
-                        @Html.DisplayFor(modelItem => item.Color)
-                        @*<p>משקל:  </p>*@
-                        @Html.DisplayFor(modelItem => item.Weight)
-                        <p>יחידות:  </p>
-                        @Html.DisplayFor(modelItem => item.Unit)
-                        </a>
+                        if(ProductName != item.TypeName)
+                        {
+                          <a class="table">
+                              @*<p>שם:  </p>*@
+                              @Html.DisplayFor(modelItem => item.TypeName)
+                              @*<p>צבע:  </p>*@
+                              @Html.DisplayFor(modelItem => item.Color)
+                              @*<p>מחיר:  </p>*@
+                              @Html.DisplayFor(modelItem => item.Price)
+                              @*<p>משקל:  </p>*@
+                              @Html.DisplayFor(modelItem => item.Weight)
+                              <p>יחידות:  </p>
+                              @Html.DisplayFor(modelItem => item.Unit)
+                          </a>
+                            ProductName = item.TypeName;
+                        }
+
 
                     }
                     <p>@price מחיר כולל:</p>

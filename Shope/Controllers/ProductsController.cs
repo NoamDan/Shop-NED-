@@ -35,7 +35,7 @@ namespace Shope.Controllers
                 var p = int.Parse(price);
                 filter = filter.Where(t => t.Price > p);
             }
-            return View("ProductHome",await filter.ToListAsync());
+            return View("Index",await filter.ToListAsync());
            
         }
 
@@ -63,14 +63,15 @@ namespace Shope.Controllers
         public IActionResult AddToCart(int productid , int unit)
         {
             Product p = _context.Product.Where(x => x.Id == productid).FirstOrDefault();
-            
-            for(int i=0; i < unit; i++) {
-                if (p.Unit > 0)
+            for (int i=0; i < unit; i++) {
+                if (p.Unit > 0 && unit <= p.Unit)
                 {
                     Global.CurrentCart.Products.Add(p);
                     Global.CurrentCart.TotalAmount += p.Price;
                 }
             }
+            
+            //p.Unit-= i;
             return View("cart");
         }
 

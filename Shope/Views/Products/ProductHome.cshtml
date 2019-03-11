@@ -38,17 +38,18 @@
                     </form>
                     <form asp-contoller="Product" asp-action="index">
                         <p>
-                            ממחיר:<input type="text" name="OfThePrice" />
-                            <input type="submit" value="חיפוש" />
-                        </p>
-                    </form>
-                    <form asp-contoller="Product" asp-action="index">
-                        <p>
-                            עד מחיר:<input type="text" name="price" />
+                            ממחיר:<input type="number" min="0" step="50" name="price" />
                             <input type="submit" value="חיפוש" />
                             <br />
                         </p>
                     </form>
+                    <form asp-contoller="Product" asp-action="index">
+                        <p>
+                            עד מחיר:<input type="number"min="100"step="50" name="OfThePrice" />
+                            <input type="submit" value="חיפוש" />
+                        </p>
+                    </form>
+
                     <form asp-contoller="Product" asp-action="index">
                         <p>
                             בחר צבע<input type="text" name="color" />
@@ -113,8 +114,8 @@
                                 <p hidden>
                                     <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" />
                                 </p>
-                                <input type="number" value="1" name="unit" />
-                                <input type="submit" value="הוסף לעגלה" style="" />
+                                <input type="number"min="1" max="3" value="1" name="unit" />
+                                <input type="submit" value="לפרטים ולרכישה" style="background-color:antiquewhite"/>
                             </form>
                         </div>
                     </div>

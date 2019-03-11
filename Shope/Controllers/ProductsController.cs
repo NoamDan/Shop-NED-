@@ -35,8 +35,8 @@ namespace Shope.Controllers
                 var p = int.Parse(price);
                 filter = filter.Where(t => t.Price > p);
             }
-            return View(await filter.ToListAsync());
-            // return View(await _context.Mesima1.ToListAsync());
+            return View("ProductHome",await filter.ToListAsync());
+           
         }
 
         public async Task<IActionResult> ProductHome(string name, string price)
@@ -251,6 +251,42 @@ namespace Shope.Controllers
         private bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        public ActionResult Search()
+        {
+            string prodName = Request.Form["prodName"];
+            var fromPrice = Request.Form["txtFromPrice"];
+            var txtToPrice = Request.Form["txtToPrice"];
+            var products = from p in _context.Product
+                           select p;
+            if (!String.IsNullOrEmpty(prodName))
+            {
+                prodName = prodName.ToLower();
+                products = products.Where(s => s.TypeName.ToLower().Contains(prodName));
+            }
+
+            if (!String.IsNullOrEmpty(fromPrice))
+            {
+                var fPrice = int.Parse(fromPrice);
+                products = products.Where(s => s.Price > fPrice);
+            }
+
+            if (!string.IsNullOrEmpty(txtToPrice))
+            {
+                var fPrice = int.Parse(txtToPrice);
+                products = products.Where(s => s.Price < fPrice);
+            }
+            return PartialView("ProductHome", products.ToList()); ;
+
+            // We don't need it since we changed to ajax
+            //HomeVm homeVm = new HomeVm();
+            //homeVm.Products = products.ToList();
+
+            //homeVm.TopSale = getMostSale();
+            //return View("Index", homeVm);
+
         }
     }
 }

@@ -41,22 +41,24 @@ button:hover {
 <body>
     <div class="container text-center">
         <div class="row">
-            <div class="col-sm-3 well">
+            <div class="col-sm-8 well">
                 <div class="well">
-                    <h2>cart</h2>
+                    <h2>העגלה שלי</h2>
                     @{var price = Global.CurrentCart.TotalAmount;}
                     @foreach (var item in Global.CurrentCart.Products)
                     {
-                        <p>שם:  </p>
+                        <a class="table">
+                        @*<p>שם:  </p>*@
                         @Html.DisplayFor(modelItem => item.TypeName)
-                        <p>מחיר:  </p>
+                        @*<p>מחיר:  </p>*@
                         @Html.DisplayFor(modelItem => item.Price)
-                        <p>צבע:  </p>
+                        @*<p>צבע:  </p>*@
                         @Html.DisplayFor(modelItem => item.Color)
-                        <p>משקל:  </p>
+                        @*<p>משקל:  </p>*@
                         @Html.DisplayFor(modelItem => item.Weight)
                         <p>יחידות:  </p>
                         @Html.DisplayFor(modelItem => item.Unit)
+                        </a>
 
                     }
                     <p>@price מחיר כולל:</p>

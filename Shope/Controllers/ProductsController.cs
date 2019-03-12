@@ -62,16 +62,29 @@ namespace Shope.Controllers
 
         public IActionResult AddToCart(int productid , int unit)
         {
+            Global.Note = 0;    
             Product p = _context.Product.Where(x => x.Id == productid).FirstOrDefault();
+            if (p.Unit < 1)
+            {
+                Global.Note = 1;
+                return View("cart");
+            }
+            else if(unit > p.Unit)
+            {
+                Global.Note = 2;
+                return View("cart");
+            }
             for (int i=0; i < unit; i++) {
                 if (p.Unit > 0 && unit <= p.Unit)
                 {
                     Global.CurrentCart.Products.Add(p);
                     Global.CurrentCart.TotalAmount += p.Price;
+
                 }
+                              
             }
-            
-            //p.Unit-= i;
+
+            Global.CurrentCart.Count.Add(unit);
             return View("cart");
         }
 

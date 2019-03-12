@@ -45,7 +45,7 @@
                     </form>
                     <form asp-contoller="Product" asp-action="index">
                         <p>
-                            עד מחיר:<input type="number"min="100"step="50" name="OfThePrice" />
+                            עד מחיר:<input type="number" min="100" step="50" name="OfThePrice" />
                             <input type="submit" value="חיפוש" />
                         </p>
                     </form>
@@ -97,7 +97,7 @@
                 <div class="item col-lg-3 hvr-float-shadow">
                     <div class="thumbnail">
                         @*<div class="group list-group-image product-img" style="width:80px;height:200px;;background-image: url('@Html.DisplayFor(modelItem => item.image)')"></div>*@
-                        <img class="img-responsive" src="@Html.DisplayFor(modelItem=> item.Image)" style="width:200px;height:220px" target="_blank" />
+                        <img class="img-responsive" src="@Html.DisplayFor(modelItem => item.Image)" style="width:200px;height:220px" target="_blank" />
 
                         <div class="caption">
                             <h4 class="group inner list-group-item-heading">
@@ -108,20 +108,24 @@
                             <p class="group inner list-group-item-text">
                                 <label>Price:</label>$@Html.DisplayFor(modelItem => item.Price)
                             </p>
+                            <p class="group inner list-group-item-text">
+                                <label>Unit:</label>@Html.DisplayFor(modelItem => item.Unit)
+                            </p>
 
                             <form asp-contoller="Product" asp-action="AddToCart">
 
                                 <p hidden>
                                     <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" />
                                 </p>
-                                <input type="number"min="1" value="1" name="unit" />
-                                <input type="submit" value="לפרטים ולרכישה" style="background-color:antiquewhite"/>
+                                <input type="number" min="1" value="1" name="unit" />
+                                <input type="submit" value="לפרטים ולרכישה" style="background-color:antiquewhite" />
                             </form>
                         </div>
                     </div>
                 </div>
             }
-        </div> 
+
+        </div>
     </div>
 </body>
 

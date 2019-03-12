@@ -37,37 +37,80 @@ button:hover {
 .container {
   padding: 16px;
 }
+    .twitter-share, .facebook-share {
+        background: #fff;
+        color: rgb(87, 207, 244);
+        cursor: pointer;
+        display: inline-table;
+        padding: 1em 2em;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        background-color: cornflowerblue;
+        color: white;
+    }
 </style>
 <body>
+    @{ if (Global.Note == 1)
+        {
+
+            <div class="alert alert-danger">
+                <strong>Danger!</strong> מלאי חסר
+            </div>
+        }
+    }
+    @{ if (Global.Note == 2)
+        {
+
+            <div class="alert alert-danger">
+                <strong>Danger!</strong> אין מספיק פריטים
+            </div>
+        }
+    }
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-8 well">
                 <div class="well">
                     <h2>העגלה שלי</h2>
-                    @{ var ProductName  = "abc";}
+                    @{ var ProductName = "abc";}
                     @{var price = Global.CurrentCart.TotalAmount;}
+                    @{var i = 0;}
                     @foreach (var item in Global.CurrentCart.Products)
                     {
-                        if(ProductName != item.TypeName)
+                        if (ProductName != item.TypeName)
                         {
-                          <a class="table">
-                              @*<p>שם:  </p>*@
-                              @Html.DisplayFor(modelItem => item.TypeName)
-                              @*<p>צבע:  </p>*@
-                              @Html.DisplayFor(modelItem => item.Color)
-                              @*<p>מחיר:  </p>*@
-                              @Html.DisplayFor(modelItem => item.Price)
-                              @*<p>משקל:  </p>*@
-                              @Html.DisplayFor(modelItem => item.Weight)
-                              <p>יחידות:  </p>
-                              @Html.DisplayFor(modelItem => item.Unit)
-                          </a>
+                            <div class="item col-lg-3 hvr-float-shadow">
+                                <div class="thumbnail">
+                                    @*<div class="group list-group-image product-img" style="width:80px;height:200px;;background-image: url('@Html.DisplayFor(modelItem => item.image)')"></div>*@
+                                    <img class="img-responsive" src="@Html.DisplayFor(modelItem => item.Image)" style="width:200px;height:220px" target="_blank" />
+
+                                    <div class="caption">
+                                        <h4 class="group inner list-group-item-heading">
+                                            <label>Name:</label>
+                                            @Html.DisplayFor(modelItem => item.TypeName)
+                                        </h4>
+
+                                        <p class="group inner list-group-item-text">
+                                            <label>Price:</label>$@Html.DisplayFor(modelItem => item.Price)
+                                        </p>
+                                    </div>
+
+                                    @{var counter = Global.CurrentCart.Count[i];}
+                                    @{i++;}
+                                    <p class="group inner list-group-item-text">
+                                        <label>Unit:</label> @counter
+                                    </p>
+                                </div>
+                            </div>
                             ProductName = item.TypeName;
                         }
 
 
                     }
-                    <p>@price מחיר כולל:</p>
+                    <div class="signupbtn">
+                        <h1>@price : מחיר כולל</h1>
+                    </div>
+
+
                     <div class="clearfix">
                         <form asp-contoller="Products" asp-action="ProductHome">
                             <button type="submit" class="cancelbtn">הוסף מוצרים</button>
@@ -80,7 +123,7 @@ button:hover {
             </div>
         </div>
     </div>
-    </body>
+</body>
 
 
 

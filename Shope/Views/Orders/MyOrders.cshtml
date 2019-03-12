@@ -1,31 +1,48 @@
-﻿@model IEnumerable<Shope.Models.OrderAndProduct>
+﻿@model IEnumerable<Shope.Models.Product>
 
 @{
     ViewData["Title"] = "MyOrders";
 }
+<head>
+    <style>
 
-<h2>MyOrders</h2>
-<p>
-    <a asp-action="MyOrders">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem =>item.ProductId)
-                </td>
-            </tr>
+        .twitter-share, .facebook-share {
+            background: #fff;
+            color: rgb(87, 207, 244);
+            cursor: pointer;
+            display: inline-table;
+            padding: 1em 2em;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            background-color: cornflowerblue;
+            color: white;
         }
-    </tbody>
-</table>
+    </style>
+
+</head>
+<body>
+    <h2>MyOrders</h2>
+    @foreach (var item in Model)
+    {
+        <div class="item col-lg-3 hvr-float-shadow">
+            <div class="thumbnail">
+                @*<div class="group list-group-image product-img" style="width:80px;height:200px;;background-image: url('@Html.DisplayFor(modelItem => item.image)')"></div>*@
+                <img class="img-responsive" src="@Html.DisplayFor(modelItem=> item.Image)" style="width:200px;height:220px" target="_blank" />
+
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        <label>Name:</label>
+                        @Html.DisplayFor(modelItem => item.TypeName)
+                    </h4>
+
+                    <p class="group inner list-group-item-text">
+                        <label>Price:</label>$@Html.DisplayFor(modelItem => item.Price)
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+
 

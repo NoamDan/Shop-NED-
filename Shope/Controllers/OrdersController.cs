@@ -67,15 +67,16 @@ namespace Shope.Controllers
             ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", order.CustomerId);
             return View(order);
         }
-        public IActionResult MyOrders()
+        public async Task<IActionResult> MyOrders()
         {
-            var result = from ord in _context.Order
-                         where ord.CustomerId == Global.sessionID
-                         select ord.Id;
-            var FinalResult = from ordEndPro in _context.OrderAndProduct
-                              group ordEndPro.OrderId by result;
+            var query =
+            from ord in _context.Order
+            join ordandpro in _context.OrderAndProduct on ord.Id equals ordandpro.OrderId
+            join pr in _context.Product on ordandpro.ProductId equals pr.Id
+            where ord.CustomerId == Global.sessionID
+            select pr;
 
-            return View(FinalResult.ToListAsync());
+            return View(await query.Distinct().ToListAsync());
         }
 
         // GET: Orders/Edit/5

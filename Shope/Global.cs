@@ -19,7 +19,8 @@ namespace Shope
         public static int CurrenOrderId;
         public static Order ord;
         public static bool flag = false;
-  
+        public static int Note =0;
+
 
     }
     

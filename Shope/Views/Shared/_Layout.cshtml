@@ -47,7 +47,7 @@
                     {
                         <li>@Html.ActionLink("Home", "ProductHome", "Products")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Customers")</li>
-                        <li>@Html.ActionLink("User Purchases Report", "UserReports", "Orders")</li>
+                        <li>@Html.ActionLink("User Purchases Report", "MyOrders", "Orders")</li>
 
 
                         @if (Global.Admin == 2)
@@ -56,7 +56,7 @@
                             <li>@Html.ActionLink("Products", "Index", "Products")</li>
                             <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
                             <li>@Html.ActionLink("customers", "Index", "customers")</li>
-                            <li>@Html.ActionLink("Products Sold Report", "ProductsReports", "Orders")</li>
+                            <li>@Html.ActionLink("Products Sold Report", "MyOrders", "Orders")</li>
                             <li>@Html.ActionLink("Cart", "cart", "Products")</li>
                         }
                     }

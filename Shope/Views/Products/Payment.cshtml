@@ -172,9 +172,14 @@
                 </form>
             </div>
         </div>
+        @{var count = 0; }
+        @{for (int i = 0; i < Global.CurrentCart.Products.Count(); i++)
+            { count += Global.CurrentCart.Products[i].Unit;
+            }
+         }
         <div class="col-25">
             <div class="container">
-                <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>@Global.CurrentCart.Products.Count</b></span></h4>
+                <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>@count</b></span></h4>
                 <p>
                     <a href="cart">רשימת המוצרים שלך</a>
 

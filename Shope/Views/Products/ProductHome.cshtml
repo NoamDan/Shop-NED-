@@ -108,8 +108,16 @@
                             <p class="group inner list-group-item-text">
                                 <label>Price:</label>$@Html.DisplayFor(modelItem => item.Price)
                             </p>
+                            @{ var temp= item.Unit;
+                                for (int i=0; i < Global.CurrentCart.Products.Count(); i++){
+                                    if (Global.CurrentCart.Products[i].Id == item.Id)
+                                    {
+                                        temp -= Global.CurrentCart.Products[i].Unit;
+                                    }
+                                }
+                                }
                             <p class="group inner list-group-item-text">
-                                <label>Unit:</label>@Html.DisplayFor(modelItem => item.Unit)
+                                <label>Unit:</label>@temp
                             </p>
 
                             <form asp-contoller="Product" asp-action="AddToCart">

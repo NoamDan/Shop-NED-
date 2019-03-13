@@ -74,20 +74,38 @@ namespace Shope.Controllers
                 Global.Note = 2;
                 return View("cart");
             }
-            for (int i=0; i < unit; i++) {
+            
                 if (p.Unit > 0 && unit <= p.Unit)
                 {
-                    Global.CurrentCart.Products.Add(p);
-                    Global.CurrentCart.TotalAmount += p.Price;
+                    for(int z=0; z< Global.CurrentCart.Products.Count; z++)
+                    {
+                        if(Global.CurrentCart.Products[z].Id == productid)
+                        {
+                        Global.CurrentCart.Products[z].Unit += unit;
+                        Global.CurrentCart.TotalAmount += (p.Price*unit);
+                        return View("cart");
+                    }
+                    }
+                p.Unit = unit;
+                Global.CurrentCart.Products.Add(p);
+                Global.CurrentCart.TotalAmount += (p.Price * unit);
 
                 }
-                              
-            }
-
-            Global.CurrentCart.Count.Add(unit);
+    
             return View("cart");
         }
-
+        public IActionResult RemoveFromCart(int productid)
+        {
+            for(int i=0; i < Global.CurrentCart.Products.Count(); i++)
+            {
+                if (Global.CurrentCart.Products[i].Id == productid)
+                {
+                    Global.CurrentCart.TotalAmount -= (Global.CurrentCart.Products[i].Price * Global.CurrentCart.Products[i].Unit);
+                    Global.CurrentCart.Products.RemoveAt(i);
+                }
+            }
+            return View("cart");
+        }
         public IActionResult Payment()
         {
             if(Global.sessionID == 0)
@@ -146,9 +164,10 @@ namespace Shope.Controllers
                     var result = (from p in _context.Product
                                   where p.Id == Global.CurrentCart.Products.FirstOrDefault().Id
                                   select p).FirstOrDefault();
-                    result.Unit -= 1;
+                    result.Unit -= Global.CurrentCart.Products.FirstOrDefault().Unit;
                     _context.SaveChanges();
                     if (!(i == size - 1)){
+                       
                         Global.CurrentCart.Products.RemoveAt(i);
                     }
                    

@@ -72,12 +72,12 @@ button:hover {
                 <div class="well">
                     <h2>העגלה שלי</h2>
                     @{ var ProductName = "abc";}
-                    @{var price = Global.CurrentCart.TotalAmount;}
-                    @{var i = 0;}
+
                     @foreach (var item in Global.CurrentCart.Products)
                     {
                         if (ProductName != item.TypeName)
                         {
+
                             <div class="item col-lg-3 hvr-float-shadow">
                                 <div class="thumbnail">
                                     @*<div class="group list-group-image product-img" style="width:80px;height:200px;;background-image: url('@Html.DisplayFor(modelItem => item.image)')"></div>*@
@@ -94,18 +94,25 @@ button:hover {
                                         </p>
                                     </div>
 
-                                    @{var counter = Global.CurrentCart.Count[i];}
-                                    @{i++;}
                                     <p class="group inner list-group-item-text">
-                                        <label>Unit:</label> @counter
+                                        <label>Unit:</label> @Html.DisplayFor(modelItem => item.Unit)
                                     </p>
+                                    <form asp-contoller="Product" asp-action="RemoveFromCart">
+
+                                        <p hidden>
+                                            <input type="number" name="productid" value="@Html.DisplayFor(modelItem => item.Id)" />
+                                        </p>
+                                        <input type="submit" value="הסר פריט" class="group inner list-group-item-text" />
+                                    </form>
                                 </div>
                             </div>
+
                             ProductName = item.TypeName;
                         }
 
 
                     }
+                    @{var price = Global.CurrentCart.TotalAmount;}
                     <div class="signupbtn">
                         <h1>@price : מחיר כולל</h1>
                     </div>

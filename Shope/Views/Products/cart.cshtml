@@ -71,12 +71,12 @@ button:hover {
             <div class="col-sm-8 well">
                 <div class="well">
                     <h2>העגלה שלי</h2>
-                    @{ var ProductName = "abc";}
+                    @*@{ var ProductName = "abc";}*@
 
                     @foreach (var item in Global.CurrentCart.Products)
                     {
-                        if (ProductName != item.TypeName)
-                        {
+                        //if (ProductName != item.TypeName)
+                        //{ 
 
                             <div class="item col-lg-3 hvr-float-shadow">
                                 <div class="thumbnail">
@@ -107,8 +107,8 @@ button:hover {
                                 </div>
                             </div>
 
-                            ProductName = item.TypeName;
-                        }
+                            //ProductName = item.TypeName;
+                        //}
 
 
                     }

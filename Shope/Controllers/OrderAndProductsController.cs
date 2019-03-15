@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Shope.Models;
 
 namespace Shope.Controllers
@@ -160,6 +161,32 @@ namespace Shope.Controllers
         private bool OrderAndProductExists(int id)
         {
             return _context.OrderAndProduct.Any(e => e.OrderAndProductId == id);
+        }
+        public class temp
+        {
+            public int result { get; set; }
+            public int result2 { get; set; }
+
+
+        }
+        public async Task<IActionResult> OrdersByUsers()
+        {
+            int customerid = 1;
+            List<temp> temps;
+            //temp res1 = new temp();
+            var result = (from t in _context.Order
+                          where t.CustomerId == customerid
+                          group t.Id by t.CustomerId into j
+                          select new {
+                              CustomerId = j.Key, ID = j.ToList()
+                           });
+
+
+            var result2 = from t in result.FirstOrDefault().ID  
+            join pr in _context.OrderAndProduct on
+
+
+            return View();
         }
     }
 }

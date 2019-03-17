@@ -8,18 +8,18 @@
 
 <p>
     <a asp-action="Create">הוסף לקוח</a>
-</p>    
+</p>
 
 <form asp-contoller="Customer" asp-action="index">
     <p>
-       עיר:<input type="text" name="cus" />
+        עיר:<input type="text" name="cus" />
         <input type="submit" value="filter" />
     </p>
 </form>
 <form asp-contoller="Customer" asp-action="index">
     <p>
-        שם פרטי:<input type="text" name="fname"/>
-        <input type="submit" value="filter"/>
+        שם פרטי:<input type="text" name="fname" />
+        <input type="submit" value="filter" />
     </p>
 </form>
 
@@ -57,37 +57,93 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lnam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberHome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAdmin)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lnam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Street)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberHome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAdmin)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+<div id="map"></div>
+
+
+
+@section Styles  {
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+}
+@section Scripts {
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            var uluru = { lat: 32.344, lng: 34.036 };
+            // The map, centered at Uluru
+            Window.map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 7, center: uluru });
+            // The marker, positioned at Uluru
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHzTT4kjY8Rnl5pLF-MPb0VefwnrBI2dE&callback=initMap"></script>
+
+    <script>
+        $.ajax({
+            url: "/Costomer/getCity",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {},
+            success: function (data, textStatus, jqXHR) {
+                var lis_marker = new Array();
+                for (var i = 0; i < data.length; i++) {
+
+                    lis_marker[i] = new google.maps.Marker({
+                        map: Window.map,
+                        position: new google.maps.LatLng(data[i].lat, data[i].lng),
+                        title: 'Marker'
+                    });
+                }
+
+
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+
+
+    </script>
+}

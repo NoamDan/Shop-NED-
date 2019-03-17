@@ -19,6 +19,15 @@
             background-color: cornflowerblue;
             color: white;
         }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: gray;
+            color:black;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -108,14 +117,15 @@
                             <p class="group inner list-group-item-text">
                                 <label>Price:</label>$@Html.DisplayFor(modelItem => item.Price)
                             </p>
-                            @{ var temp= item.Unit;
-                                for (int i=0; i < Global.CurrentCart.Products.Count(); i++){
+                            @{ var temp = item.Unit;
+                                for (int i = 0; i < Global.CurrentCart.Products.Count(); i++)
+                                {
                                     if (Global.CurrentCart.Products[i].Id == item.Id)
                                     {
                                         temp -= Global.CurrentCart.Products[i].Unit;
                                     }
                                 }
-                                }
+                            }
                             <p class="group inner list-group-item-text">
                                 <label>Unit:</label>@temp
                             </p>
@@ -135,25 +145,13 @@
 
         </div>
     </div>
-    <footer>
-        <div class="container">
-
-            <div class="row">
-                <div class="col">
-
-                    <div class="col-sm-3 well ">
-
-                        <ul>
-                            <li><a href="~/Products/cart"><h4>העגלה שלי</h4></a> </li>
-                            <li><a href="~/Customers/Register"><h4>הרשמה</h4></a></li>
-                            <li><a href="~/Customers/Login"><h4>התחברות</h4></a></li>
-                            <li><a href="~/Home/Contact"><h4>אודות</h4></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <a href="~/Products/cart"><h4>העגלה שלי</h4></a>
+        <a href="~/Customers/Register"><h4>הרשמה</h4></a>
+        <a href="~/Customers/Login"><h4>התחברות</h4></a>
+        <a href="~/Home/Contact"><h4>אודות</h4></a>
+    </div>
 </body>
 
 

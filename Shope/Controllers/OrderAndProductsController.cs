@@ -169,24 +169,25 @@ namespace Shope.Controllers
 
 
         }
-        public async Task<IActionResult> OrdersByUsers()
-        {
-            int customerid = 1;
-            List<temp> temps;
-            //temp res1 = new temp();
-            var result = (from t in _context.Order
-                          where t.CustomerId == customerid
-                          group t.Id by t.CustomerId into j
-                          select new {
-                              CustomerId = j.Key, ID = j.ToList()
-                           });
+        //    public async Task<IActionResult> OrdersByUsers()
+        //    {
+        //        int customerid = 1;
+        //        List<temp> temps;
+        //        //temp res1 = new temp();
+        //        var result = (from t in _context.Order
+        //                      where t.CustomerId == customerid
+        //                      group t.Id by t.CustomerId into j
+        //                      select new {
+        //                          CustomerId = j.Key, ID = j.ToList()
+        //                       });
 
 
-            var result2 = from t in result.FirstOrDefault().ID  
-            join pr in _context.OrderAndProduct on
+        //        var result2 = from t in result.FirstOrDefault().ID  
+        //        join pr in _context.OrderAndProduct on
 
 
-            return View();
-        }
+        //        return View();
+        //    }
+        //}
     }
 }

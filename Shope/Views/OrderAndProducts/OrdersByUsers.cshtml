@@ -1,10 +1,37 @@
 ﻿
+@model IEnumerable<Shope.Models.Customer>
 @{
-    ViewData["Title"] = "OrdersByUsers";
+    ViewData["Title"] = "orderByUser";
 }
 
-<h2>OrdersByUsers</h2>
-<form asp-contoller="OrderAndProducts" asp-action="OrdersByUsers">
-    <button type="submit" class="cancelbtn">kjhmv</button>
-</form>
+<h2>orderByUser</h2>
+@foreach (var item in Model)
+{
+    <div class="item col-lg-3 hvr-float-shadow">
+        <div class="thumbnail">
+            @*<div class="group list-group-image product-img" style="width:80px;height:200px;;background-image: url('@Html.DisplayFor(modelItem => item.image)')"></div>*@
+
+
+            <p class="group inner list-group-item-text">
+                <label>i.d:</label>@Html.DisplayFor(modelItem => item.Id);
+            </p>
+            <p class="group inner list-group-item-text">
+                <label>fname:</label>@Html.DisplayFor(modelItem => item.Fname);
+            </p>
+            <p class="group inner list-group-item-text">
+                <label>lname:</label>@Html.DisplayFor(modelItem => item.Lnam);
+            </p>
+            <form asp-contoller="OrderAndProducts" asp-action="OrdersByUser">
+
+                <p hidden>
+                    <input type="number" name="customerid" value="@Html.DisplayFor(modelItem => item.Id)" />
+                </p>
+
+                <input type="submit" value="רשימת הזמנות" style="background-color:antiquewhite" />
+            </form>
+        </div>
+        </div>
+    
+}
+
 

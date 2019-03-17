@@ -169,25 +169,39 @@ namespace Shope.Controllers
 
 
         }
-        //    public async Task<IActionResult> OrdersByUsers()
-        //    {
-        //        int customerid = 1;
-        //        List<temp> temps;
-        //        //temp res1 = new temp();
-        //        var result = (from t in _context.Order
-        //                      where t.CustomerId == customerid
-        //                      group t.Id by t.CustomerId into j
-        //                      select new {
-        //                          CustomerId = j.Key, ID = j.ToList()
-        //                       });
+        //get
+        public async Task<IActionResult> OrdersByUsers()
+        {
+            var resutls = from cus in _context.Customer
+                          select cus;
+
+            return View(await resutls.ToListAsync());
+        }
+
+        
+        public async Task<IActionResult> OrdersByUser(int customerid)
+        {
+            var results = from o in _context.Order
+                          where o.CustomerId == customerid
+                          group o.Id by o.CustomerId into g
+                          select new { a = g.Key, b = g.ToList() }.b;
 
 
-        //        var result2 = from t in result.FirstOrDefault().ID  
-        //        join pr in _context.OrderAndProduct on
 
+            //var result2 = (from oap in _context.OrderAndProduct
+            //               join t in workTable on oap.OrderId equals t.
+            //               //join pr in _context.Product on oap.ProductId equals pr.Id
 
-        //        return View();
-        //    }
-        //}
+            //               select oap.ProductId);
+
+            var query = from or in _context.Order
+                        where or.CustomerId == customerid
+                        join oap in _context.OrderAndProduct on or.Id equals oap.OrderId
+                        join pr in _context.Product on oap.ProductId equals pr.Id
+                        select pr;
+                        
+
+            return View(await query.ToListAsync());
+        }
     }
 }

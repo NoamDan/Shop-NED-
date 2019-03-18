@@ -46,7 +46,7 @@
 
 </head>
 <body>
-   
+
     <br />
     <br />
     <marquee>
@@ -165,6 +165,42 @@
 
         </div>
     </div>
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener" target="_blank"><span class="blue-text">Financial Markets</span></a> by TradingView</div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+            {
+                "symbols": [
+                    {
+                        "title": "S&P 500",
+                        "proName": "INDEX:SPX"
+                    },
+                    {
+                        "title": "Shanghai Composite",
+                        "proName": "INDEX:XLY0"
+                    },
+                    {
+                        "title": "EUR/USD",
+                        "proName": "FX_IDC:EURUSD"
+                    },
+                    {
+                        "title": "BTC/USD",
+                        "proName": "BITFINEX:BTCUSD"
+                    },
+                    {
+                        "title": "ETH/USD",
+                        "proName": "BITFINEX:ETHUSD"
+                    }
+                ],
+                    "theme": "light",
+                        "isTransparent": false,
+                            "displayMode": "adaptive",
+                                "locale": "en"
+            }
+        </script>
+    </div>
+    <!-- TradingView Widget END -->
 
     <div class="jumbotron text-center" style="margin-bottom:0">
         <a href="~/Products/cart"><h4>העגלה שלי</h4></a>

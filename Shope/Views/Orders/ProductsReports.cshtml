@@ -1,0 +1,122 @@
+﻿
+@model IEnumerable<Shope.Models.OrderProdectsCount>
+@{
+    ViewBag.Title = "Report";
+}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2><label class="label label-info"><b>Total item sold</b></label></h2>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<div id="svgContent"></div>
+
+@section Scripts{
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script>
+
+        $(function () {
+
+            $.ajax({
+                url: "/Orders/GetProdectsPerOrder",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: {},
+                success: function (data, textStatus, jqXHR) {
+
+                    showGraph(data);
+                },
+
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+
+
+            function showGraph(data) {
+
+                var margin = { top: 40, left: 40, right: 40, bottom: 40 };
+                width = 300;
+                height = 300;
+                radius = Math.min(width - 100, height - 100) / 2;
+                var color = d3.scale.category10();
+                var arc = d3.svg.arc()
+                    .outerRadius(radius - 230)
+                    .innerRadius(radius - 50)
+                    .cornerRadius(20)
+                var arcOver = d3.svg.arc()
+                    .outerRadius(radius + 50)
+                    .innerRadius(0);
+
+                var a = width / 2 - 20;
+                var b = height / 2 - 90;
+                var svg = d3.select("#svgContent").append("svg")
+                    .attr("viewBox", "0 0 " + width + " " + height / 2)
+                    .attr("preserveAspectRatio", "xMidYMid meet")
+                    .append("g")
+                    .attr("transform", "translate(" + a + "," + b + ")");
+
+                div = d3.select("body")
+                    .append("div")
+                    .attr("class", "tooltip");
+                var pie = d3.layout.pie()
+                    .sort(null)
+                    .value(function (d) { return d.count; })
+                    .padAngle(.02);
+                var g = svg.selectAll(".arc")
+                    .data(pie(data))
+                    .enter()
+                    .append("g")
+                    .attr("class", "arc")
+                    .on("mousemove", function (d) {
+                        var mouseVal = d3.mouse(this);
+                        div.style("display", "none");
+                        div
+                            .html("Product:" + d.data.productName + "</br>" + "No. of Orders:" + d.data.count)
+                            .style("left", (d3.event.pageX + 12) + "px")
+                            .style("top", (d3.event.pageY - 10) + "px")
+                            .style("opacity", 1)
+                            .style("display", "block");
+                    })
+                    .on("mouseout", function () { div.html(" ").style("display", "none"); });
+
+
+                g.append("path")
+                    .attr("id", function (d) { return d.data.productName } )
+                    .attr("d", arc)
+                    .style("fill", function (d) {
+                        var col = color(d.data.productName);
+
+                        var text = svg.append("text")
+
+                            .attr("x", 10)
+                            .attr("dy", -1);
+
+                        text.append("textPath")
+                            .attr("xlink:href", '#' + d.data.productName)
+                            .text(d.data.productName);
+                        return col;
+                    })
+                    .attr("d", arc);
+
+
+            }
+        });
+    </script>
+}
+
+
+
+@section Styles{
+    <style>
+        textPath {
+            font-size: 5px;
+        }
+    </style>
+}
+
+

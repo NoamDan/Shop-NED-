@@ -11,9 +11,10 @@ using System;
 namespace Shope.Migrations
 {
     [DbContext(typeof(ShopeContext))]
-    partial class ShopeContextModelSnapshot : ModelSnapshot
+    [Migration("20190318181827_userandreport")]
+    partial class userandreport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,8 +69,6 @@ namespace Shope.Migrations
                     b.Property<int>("OrderId");
 
                     b.Property<int>("ProductId");
-
-                    b.Property<int>("Unit");
 
                     b.HasKey("OrderAndProductId");
 

@@ -78,7 +78,62 @@ namespace Shope.Controllers
 
             return View(await query.Distinct().ToListAsync());
         }
+        public JsonResult GetUsersPerOrder()
+        {
+            var userOrders = new List<string>();
+            var orders = _context.Order.ToList();
+            var _usersOrder = new List<UserOrderReport>();
 
+            foreach (var item in orders)
+            {
+                if (!userOrders.Contains(item.CustomerId.ToString()))
+                {
+                    userOrders.Add(item.CustomerId.ToString());
+                    _usersOrder.Add(new UserOrderReport
+                    {
+                        UserName = _context.Customer.First(u => u.Id == item.CustomerId).Fname,
+                        Count = orders.Count(x => x.CustomerId == item.CustomerId),
+                    });
+                }
+            }
+            return Json(_usersOrder);
+        }
+        public JsonResult GetProdectsPerOrder()
+        {
+            var productsPerOrders = new SortedDictionary<int, int>();
+
+            var products = _context.OrderAndProduct;
+
+            foreach (var item in products)
+            {
+                if (!productsPerOrders.ContainsKey(item.ProductId))
+                {
+                    productsPerOrders[item.ProductId] = 0;
+                }
+                productsPerOrders[item.ProductId] += item.Unit;
+            }
+
+            var productsCount = new List<OrderProdectsCount>();
+            foreach (var item in productsPerOrders)
+            {
+                productsCount.Add(new OrderProdectsCount()
+                {
+                    ProductName = _context.Product.First(k => k.Id == item.Key).TypeName,
+                    Count = item.Value
+                });
+            }
+
+            return Json(productsCount);
+        }
+        public ActionResult UserReports()
+        {
+            return View("UserReports", new List<UserOrderReport>());
+        }
+
+        public ActionResult ProductsReports()
+        {
+            return View("ProductsReports", new List<OrderProdectsCount>());
+        }
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

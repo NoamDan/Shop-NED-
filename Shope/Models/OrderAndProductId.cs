@@ -11,15 +11,20 @@ namespace Shope.Models
         public int OrderId { get; set; }
         public Order Order { get; set; }
         public int ProductId { get; set; }
+        public int Unit { get; set; }
         public Product Product { get; set; }
         public OrderAndProduct()
         {
+            if (Global.CurrentCart.TotalAmount > 0)
+            {
                 Global.flag = Global.ord.UpdateOrderId();
                 if (Global.flag)
-                {  
+                {
                     this.OrderId = Global.CurrenOrderId;
                     this.ProductId = Global.CurrentCart.Products.FirstOrDefault().Id;
+                    this.Unit = Global.CurrentCart.Products.FirstOrDefault().Unit;
                 }
+            }
         }
     }
 }

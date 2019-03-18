@@ -3,73 +3,208 @@
     ViewData["Title"] = "Home Page";
 }
 
-<a href="~/Customers/Register">הרשמה</a>
-
-<a href="~/Customers/Login">התחברות</a>
-
-<a class="weatherwidget-io" href="https://forecast7.com/he/32d0934d78/tel-aviv-yafo/" data-label_1="תל אביב יפו" data-label_2="WEATHER" data-theme="original">תל אביב יפו WEATHER</a>
-<script>
-    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
-</script>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style>
-        body {
-            /*background: rgb(87, 207, 244);*/
-            color: #fff;
-            font-family: sans-serif;
-            margin: 0;
-            padding-top: 5em;
-            text-align: center;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .twitter-share, .facebook-share {
-            background: #fff;
-            color: rgb(87, 207, 244);
-            cursor: pointer;
-            display: inline-block;
-            padding: 1em 2em;
-            -webkit-border-radius: 6px;
-            border-radius: 6px;
-            &:hover
-        }
-
-        {
-            position: relative;
-            top: -1px;
-        }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Locator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <span class="twitter-share" data-js="twitter-share">Share on Twitter</span>
-    <span class="facebook-share" data-js="facebook-share">Share on Facebook</span>
-    <script>
-        var twitterShare = document.querySelector('[data-js="twitter-share"]');
-
-        twitterShare.onclick = function (e) {
-            e.preventDefault();
-            var twitterWindow = window.open('https://twitter.com/share?url=' + document.URL, 'twitter-popup', 'height=350,width=600');
-            if (twitterWindow.focus) { twitterWindow.focus(); }
-            return false;
-        }
-
-        var facebookShare = document.querySelector('[data-js="facebook-share"]');
-
-        facebookShare.onclick = function (e) {
-            e.preventDefault();
-            var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u=' + document.URL, 'facebook-popup', 'height=350,width=600');
-            if (facebookWindow.focus) { facebookWindow.focus(); }
-            return false;
-        }
-    </script>
-    <td class="map">
-        <iframe width="460" height="215" frameborder="0" scrolling="no" marginheight="0"
-                marginwidth="0" src="//maps.google.com/?ie=UTF8&hq=&hnear=%D7%A8%D7%97%D7%95%&ll=32.084508,34.801830& spn=0.128909,0.246677&t=m&z=13&vpsrc=6&output=embed"></iframe><br /><small><a href="//maps.google.com/?ie=UTF8&hq=&hnear=%D7%A8%D7%97%D7%95%D7%91%D7%&ll=32.0,34.8; spn=0.128909,0.246677&t=m&z=13&vpsrc=6&source=embed" style="color:#0000FF;text-align:left"></a></small>
-    </td>
-    <iframe width="640" height="360" src="https://www.youtube.com/embed/3bK7ZXlSw4E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
+<body>
+    <div class="container">
+        <h3>Current Location</h3>
+        @*<p>You can click the button below to use your current location as your shipping address</p>*@
+        <div id="map">
+        </div>
+        <button id="showMe" class="btn">Use My Location</button>
+        @*<form id="shippingAddress">
+            <div id="locationList"></div>
+            <br>
+            <div class="input-field">
+                <textarea class="input_fields materialize-textarea" id="address" type="text"></textarea>
+                <label class="active" for="address">Address (Area and Street)</label>
+            </div>
+            <div class="input-field">
+                <input class="input_fields" id="locality" type="text">
+                <label class="active" for="locality">Locality</label>
+            </div>
+            <div class="input-field">
+                <input class="input_fields" id="city" type="text">
+                <label class="active" for="city">City/District/Town</label>
+            </div>
+            <div class="input-field">
+                <input class="input_fields" id="postal_code" type="text">
+                <label class="active" for="pin_code">Pin Code</label>
+            </div>
+            <div class="input-field">
+                <input class="input_fields" id="landmark" type="text">
+                <label class="active" for="landmark">Landmark</label>
+            </div>
+            <div class="input-field">
+                <input class="input_fields" id="state" type="text">
+                <label class="active" for="State">State</label>
+            </div>
+        </form>*@
+        <!-- You could add a fallback address gathering form here -->
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2hqIrMlMtIUibJs7S_JJ_kt3DyuKWANs"></script>
+    <script src="js/main.js"></script>
+</body>
+<style>
+.container {
+  width: 50%;
+  max-width: 800px;
+}
+
+#map {
+  height: 50vh;
+  margin-bottom: 10px;
+  display: none;
+}
+
+#locationList .card {
+  padding: 10px;
+}
+
+#toast-container {
+  top: 50%;
+  bottom: unset;
+}
+
+.toast {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@*@media only screen and (max-width: 768px) {
+      .container {
+        width: 80%;
+      }
+    }*@
+</style>
+<script>
+    const mapArea = document.getElementById('map');
+
+    //This button will set everything into motion when clicked
+    const actionBtn = document.getElementById('showMe');
+
+    //This will display all the available addresses returned by Google's Geocode Api
+    const locationsAvailable = document.getElementById('locationList');
+
+    //Let's bring in our API_KEY
+    const __KEY = 'YOUR_API_KEY';
+
+    //Let's declare our Gmap and Gmarker variables that will hold the Map and Marker Objects later on
+    let Gmap;
+    let Gmarker;
+
+    //Now we listen for a click event on our button
+    actionBtn.addEventListener('click', e => {
+        // hide the button
+        actionBtn.style.display = "none";
+        // call Materialize toast to update user
+        M.toast({ html: 'fetching your current location', classes: 'rounded' });
+        // get the user's position
+        getLocation();
+    });
+</script>
+<script>
+    getLocation = () => {
+        // check if user's browser supports Navigator.geolocation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(displayLocation, showError, options);
+        } else {
+            M.toast({ html: "Sorry, your browser does not support this feature... Please Update your Browser to enjoy it", classes: "rounded" });
+        }
+    }
+
+</script>
+<script>success, error, [options] *)</script>
+
+<script>
+    showError = (error) => {
+        mapArea.style.display = "block"
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                mapArea.innerHTML = "You denied the request for your location."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                mapArea.innerHTML = "Your Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                mapArea.innerHTML = "Your request timed out. Please try again"
+                break;
+            case error.UNKNOWN_ERROR:
+                mapArea.innerHTML = "An unknown error occurred please try again after some time."
+                break;
+        }
+    }
+    //Makes sure location accuracy is high
+    const options = {
+        enableHighAccuracy: true
+    }
+
+</script>
+<script>
+    displayLocation = (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+    }
+</script>
+<script>
+
+    console.log(`Current Latitude is ${lat} and your longitude is ${lng}`);
+
+</script>
+<script>
+
+    const latlng = { lat, lng }
+    showMap(latlng);
+    createMarker(latlng);
+    mapArea.style.display = "block";
+
+</script>
+<script>
+
+    displayLocation = (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const latlng = { lat, lng }
+        showMap(latlng);
+        createMarker(latlng);
+        mapArea.style.display = "block";
+    }
+
+</script>
+<script>
+
+    showMap = (latlng) => {
+        let mapOptions = {
+            center: latlng,
+            zoom: 17
+        };
+        Gmap = new google.maps.Map(mapArea, mapOptions);
+    }
+
+</script>
+<script>
+
+    createMarker = (latlng) => {
+        let markerOptions = {
+            position: latlng,
+            map: Gmap,
+            animation: google.maps.Animation.BOUNCE,
+            clickable: true
+        };
+        Gmarker = new google.maps.Marker(markerOptions);
+    }
+</script>
+
+

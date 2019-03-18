@@ -35,8 +35,11 @@ namespace Shope.Controllers
                 var p = int.Parse(price);
                 filter = filter.Where(t => t.Price > p);
             }
+            if(Global.Admin==2)
             return View("Index",await filter.ToListAsync());
-           
+           else
+                return View("ProductHome", await filter.ToListAsync());
+
         }
 
         public async Task<IActionResult> ProductHome(string name, string price)

@@ -110,7 +110,7 @@ namespace Shope.Controllers
                 {
                     productsPerOrders[item.ProductId] = 0;
                 }
-                productsPerOrders[item.ProductId] += item.Unit;
+                productsPerOrders[item.ProductId] += item.Count;
             }
 
             var productsCount = new List<OrderProdectsCount>();

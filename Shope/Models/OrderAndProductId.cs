@@ -11,7 +11,7 @@ namespace Shope.Models
         public int OrderId { get; set; }
         public Order Order { get; set; }
         public int ProductId { get; set; }
-        public int Unit { get; set; }
+        public int Count { get; set; }
         public Product Product { get; set; }
         public OrderAndProduct()
         {
@@ -22,7 +22,7 @@ namespace Shope.Models
                 {
                     this.OrderId = Global.CurrenOrderId;
                     this.ProductId = Global.CurrentCart.Products.FirstOrDefault().Id;
-                    this.Unit = Global.CurrentCart.Products.FirstOrDefault().Unit;
+                    this.Count = Global.CurrentCart.Products.FirstOrDefault().Unit;
                 }
             }
         }

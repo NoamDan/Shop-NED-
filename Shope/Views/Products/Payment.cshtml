@@ -49,7 +49,6 @@
         }
 
         .container {
-            
             padding: 5px 20px 15px 20px;
             border: 1px solid lightgrey;
             border-radius: 3px;
@@ -87,7 +86,7 @@
         }
 
             .btn:hover {
-                background-color: #45a049;
+                background-color: antiquewhite;
             }
 
         a {
@@ -103,9 +102,19 @@
             color: grey;
         }
     </style>
-</head>
-<body>
+    <script>
+     
+        function onthank_you() {
+          
+            alert("קנייתך התבצעה בהצלחה ");
 
+        }
+       
+    </script>
+
+</head>
+<body onload="onthank_you">
+   
     @*<h2>Responsive Checkout Form</h2>*@
     <div class="row">
         <div class="col-75">
@@ -167,15 +176,19 @@
                     <label>
                         <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
                     </label>
-                    <input type="submit" class="btn">
+                    @*<button onclick="thank_you()"> שלח</button>*@
+                   
+                    <input id="on1" onclick="onthank_you()" type="submit" class="btn">
                 </form>
+             
             </div>
         </div>
         @{var count = 0; }
         @{for (int i = 0; i < Global.CurrentCart.Products.Count(); i++)
-            { count += Global.CurrentCart.Products[i].Unit;
+            {
+                count += Global.CurrentCart.Products[i].Unit;
             }
-         }
+        }
         <div class="col-50">
             <div class="container-fluid">
                 <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>@count</b></span></h4>
@@ -187,7 +200,9 @@
             </div>
         </div>
     </div>
-
+    <script>
+        alert("אנא הכנס פרטים")
+    </script>
 </body>
 </html>
 

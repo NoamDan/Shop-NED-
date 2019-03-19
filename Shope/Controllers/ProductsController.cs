@@ -176,9 +176,10 @@ namespace Shope.Controllers
                    
                 } 
                 Global.CurrentCart = new Cart();
-                
+
 
             }
+          
             return RedirectToAction("ProductHome", "Products");
         }
 

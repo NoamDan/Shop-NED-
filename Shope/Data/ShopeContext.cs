@@ -21,5 +21,7 @@ namespace Shope.Models
         public DbSet<Shope.Models.Product> Product { get; set; }
 
         public DbSet<Shope.Models.OrderAndProduct> OrderAndProduct { get; set; }
+
+        public DbSet<Shope.Models.Address> Address { get; set; }
     }
 }

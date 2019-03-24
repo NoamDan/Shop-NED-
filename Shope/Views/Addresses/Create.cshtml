@@ -1,0 +1,62 @@
+﻿@model Shope.Models.Address
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2><label class="label label-info"><b>Add Address To Store</b></label></h2>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Street" class="control-label"></label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Number" class="control-label"></label>
+                    <input asp-for="Number" class="form-control" />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="lat" class="control-label"></label>
+                    <input asp-for="lat" class="form-control" />
+                    <span asp-validation-for="lat" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="lng" class="control-label"></label>
+                    <input asp-for="lng" class="form-control" />
+                    <span asp-validation-for="lng" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-striped" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

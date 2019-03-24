@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Shope.Models.Address>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 style="color:#245980"><b>Address Store</b></h2>
+
+<p>
+    @Html.ActionLink(" ", "Create", null, null, new { @class = "glyphicon glyphicon-plus btn btn-primary", @title = "Add Address To Net Store" })
+</p>
+<table class="table table-hover table-striped">
+    <tr style="background-color:#84acc9;">
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>Opreations</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.ActionLink("", "Edit", null, new { id = item.ID }, new { @class = " glyphicon glyphicon-pencil btn btn-default", @title = "Edit Adreess" })
+                @Html.ActionLink("", "Details", null, new { id = item.ID }, new { @class = " glyphicon glyphicon-list-alt btn btn-default", @title = "Details Of The Adrress" })
+                @Html.ActionLink("", "Delete", null, new { id = item.ID }, new { @class = " glyphicon glyphicon-trash btn btn-default", @title = "Delete Adrress" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div id="map"></div>
+
+
+
+@section Styles  {
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+}
+@section Scripts {
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            var uluru = { lat: 32.344, lng: 34.036 };
+            // The map, centered at Uluru
+            Window.map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 7, center: uluru });
+            // The marker, positioned at Uluru
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2hqIrMlMtIUibJs7S_JJ_kt3DyuKWANs&callback=initMap"></script>
+
+    <script>
+        $.ajax({
+            url: "/Addresses/GetAddress",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {},
+            success: function (data, textStatus, jqXHR) {
+                var lis_marker = new Array();
+                for (var i = 0; i < data.length; i++) {
+
+                    lis_marker[i] = new google.maps.Marker({
+                        map: Window.map,
+                        position: new google.maps.LatLng(data[i].lat, data[i].lng),
+                        title: 'Marker'
+                    });
+                }
+
+
+
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+
+
+    </script>
+}
